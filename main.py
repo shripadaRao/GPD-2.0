@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-app = Flask(__name__)
+app = Flask(__name__, template_folder="")
 import pyrebase
 import requests
 import json
@@ -8,22 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 """example output:  {'display_text': ['hello!'], 'clock': ['on'], 'TimeTable': ['Sat', '16:33:41']} """
-
-
-# firebase_config = {"apiKey": "AIzaSyDMAxF4jqNKGy1zyV6GMgT2qxYbr1mG6bY",
-
-#   "authDomain": "gpd-2-fab7c.firebaseapp.com",
-
-#   "projectId": "gpd-2-fab7c",
-
-#   "storageBucket": "gpd-2-fab7c.appspot.com",
-
-#   "messagingSenderId": "1061276271847",
-
-#   "appId": "1:1061276271847:web:69662a45954d944b78ce42",
-
-#     "databaseURL" : "https://gpd-2-fab7c-default-rtdb.firebaseio.com/"
-# }
 
 firebase_config = {
    "apiKey" : os.getenv('API_KEY'),
@@ -34,7 +18,6 @@ firebase_config = {
    "appId" : os.getenv("appId"),
    "databaseURL" : os.getenv("databaseURL")
 }
-print(firebase_config)
 
 firebase = pyrebase.initialize_app(firebase_config)
 
@@ -60,7 +43,7 @@ def result():
       result.update(fetchTimeTableApi()) 
       #print(result)
       db.push(result)
-      return render_template("result.html")
+      return render_template("templates/result.html")
 
 
 if __name__ == '__main__':
