@@ -1,19 +1,17 @@
 from flask import Flask, jsonify
-import time
-import json
+from pytz import timezone
+from datetime import datetime
 
 app = Flask(__name__)
 
 @app.route('/currentDayTime/')
 def getCurrentDayTime():
     with app.app_context():
-        current_time = time.ctime()
-        parse_array = current_time.split(' ')
-        global parsed_array
-        current_day = parse_array[0]
-        current_time = parse_array[4]
-        parsed_array = [current_day, current_time]
-        return jsonify(parsed_array)
+        ind_time = datetime.now(timezone("Asia/Kolkata")).strftime('%a %H:%M:%S')  
+        ind_time_arr = ind_time.split(' ')
+        current_day, current_time = ind_time_arr[0], ind_time_arr[1]
+        day_time_arr = [current_day, current_time]
+        return jsonify(day_time_arr)
 
 print(getCurrentDayTime())
 
