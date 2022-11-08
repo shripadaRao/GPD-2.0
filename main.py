@@ -27,7 +27,7 @@ def home():
    return render_template('templates/index.html')
 
 def fetchTimeTableApi():
-   response_data =  requests.get("http://127.0.0.1:8080/")
+   response_data =  requests.get("https://timetableapi.pythonanywhere.com/")
    return(response_data.json())
 
 @app.route('/api',methods = ['POST', 'GET'])
@@ -36,10 +36,9 @@ def result():
       form_data = request.form.to_dict(flat=False)
       if "time-table" in form_data:
          form_data['time-table'] = str(fetchTimeTableApi())
-      
-      
+
       del form_data['sems'] #this seems unnecessary to push to storage.
-      # db.push(result)
+      db.push(form_data)
       return render_template("templates/result.html")
 
 

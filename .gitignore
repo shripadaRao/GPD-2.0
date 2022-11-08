@@ -2,3 +2,5 @@ venv/
 backend/config
 backend/__pycache__
 env
+backend/test.py
+main-deployment.py

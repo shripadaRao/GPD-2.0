@@ -1,0 +1,8 @@
+Steps for deploying timetable API
+
+USE TEST.PY for deployment. 
+
+mkvirtualenv flaskk --python=python3.8.10
+pip install flask==2.0.1
+pip install gspread==5.6.2
+pip install pytz==2019.3

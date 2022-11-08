@@ -43,7 +43,6 @@ all_class_timings = [int(x) for x in all_class_timings[1:]]
 #     res = requests.get(CURRENT_TIME_API)
 #     return(res.json())
 
-
 parsedIndexValues = [] #returns [row,column]
 
 # search for the day
@@ -58,12 +57,14 @@ def searchDayTimeValues():
     current_time = int(current_time.replace(':','')) #parse current_time 
 
     for index,class_time in enumerate(all_class_timings):
-
-        if class_time > current_time:
+        
+        if class_time > current_time :
+            print()
             parsedIndexValues.append(index+1) #appends column
             return
-    parsedIndexValues.append("no class going on")
-
+    if current_time >= all_class_timings[-1]:
+        parsedIndexValues.append(index+2)        
+        
 
 def fetchCellFromSheet(row,column):
     if type(column) != int:
@@ -77,8 +78,9 @@ app = Flask(__name__)
 def main():
     searchDayTimeValues()
     row, column = parsedIndexValues[0], parsedIndexValues[1]
-    print("row and column:",row,column)
     current_class = fetchCellFromSheet(row,column)
+    if current_class is None:
+        return jsonify("no class")
     return jsonify(current_class)
 
 if __name__ == "__main__":
