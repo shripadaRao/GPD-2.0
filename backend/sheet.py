@@ -5,7 +5,6 @@
 
 
 import gspread
-# import requests
 from pytz import timezone
 from datetime import datetime
 
@@ -17,21 +16,11 @@ def getCurrentDayTime():
     current_day, current_time = ind_time_arr[0], ind_time_arr[1]
     day_time_arr = [current_day, current_time]
     return (day_time_arr)
-# print("current day time: ",getCurrentDayTime())
 
 gc = gspread.service_account(filename="config/mcs-miniproject-7fdfa4473ccc.json")
 sh = gc.open_by_key("1pn8RGkd6cFOjd67yUU-cKNrJkBU9Ml4FlU7DPU573Sc")
 
 # write code to select with semester (sheet)
-# # def pickFile(sem):
-# #     print(sem)
-# #     return(sh.sem)
-
-# SemToSheet = {
-#     "sheet1": "5th",
-#     "sheet2" : "7th",
-#     "sheet3" : "3rd"
-# }
 
 sheet = sh.sheet1  #sheet1 
 
@@ -80,7 +69,6 @@ def fetchCellFromSheet(row,column):
     if type(column) != int:
         return "no class going on"
     return(sheet.cell(row,column).value)
-
 
 from flask import Flask, jsonify
 app = Flask(__name__)

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <h1>General Purpose display</h1>
+    <br />
+    <br />
+    <form action="http://localhost:5000/api" method="POST">
+      <p>DisplayText <input type="text" name="display_text" /></p>
+      <p>Clock</p>
+      <label class="switch">
+        <input type="checkbox" name="clock" />
+        <span class="slider round"></span>
+      </label>
+      <p>Time Table</p>
+      <label class="switch">
+        <input type="checkbox" name="time-table" />
+        <span class="slider round"></span>
+        <br />
+        <br />
+        <select name="sems" id="sems">
+          <option value="3rd">3rd</option>
+          <option value="5th">5th</option>
+          <option value="7th">7th</option>
+        </select>
+      </label>
+
+      <p><input type="submit" value="submit" /></p>
+    </form>
+  </body>
+</html>
